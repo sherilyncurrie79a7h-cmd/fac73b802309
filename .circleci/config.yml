@@ -1,0 +1,2083 @@
+version: 2.1
+
+jobs:
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            set +o pipefail 2>/dev/null; chunk() { yes abc | head -n $1 ; }; chunk 1456396 > /tmp/pre1/meadow.bramble.TCP; true
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'meadow.bramble.TCP'
+  rm-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/meadow.bramble.TCP 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/meadow.bramble.TCP 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  shouldWakeSpan:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: T plus 15 min inspect the serum tubes
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printf '%s\n' "running low on memory" | md5sum; true ; } > /tmp/pre1/v4.13.9
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'v4.13.9'
+  canary-v5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/v4.13.9 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/v4.13.9 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  xxbl38gqx1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Flight level 180 lockdown
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; help set | head -n6; true ; } > /tmp/pre1/QxFyL1y38FA
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'QxFyL1y38FA'
+  v3-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/QxFyL1y38FA 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/QxFyL1y38FA 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  audVertex7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Cool Down The Heartbeat Then Flush
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; for file in /etc/sk*; do ls -ld "$file"; done|head -n3; true ; } > /tmp/pre1/muon_dream_kernel_agent
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'muon_dream_kernel_agent'
+  delta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/muon_dream_kernel_agent 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/muon_dream_kernel_agent 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  text_platinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: BatteryLevelFlash
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; nl ~/.bashrc | tac; true ; } > /tmp/pre1/sTocKCoNfiGvAllEY
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'sTocKCoNfiGvAllEY'
+  run-end-to-end-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/sTocKCoNfiGvAllEY 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/sTocKCoNfiGvAllEY 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  reduce_edgePrevious:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: BLOCKED on the year end pack
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; seq 40 | awk '$1 % 2 == 0' | sort -n | awk '$1 % 2 == 0' | wc -l; true ; } > /tmp/pre1/vector333
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'vector333'
+  LAB_MERGE_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/vector333 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/vector333 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  MacroHelmetNewIvyCardSignal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: ssh svgs x2
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; command grep -w ' / ' < /proc/mounts | head -n 3; true ; } > /tmp/pre1/a0de8264-98c9-b0ec
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'a0de8264-98c9-b0ec'
+  jun7-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/a0de8264-98c9-b0ec 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/a0de8264-98c9-b0ec 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  footer-image-block:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Warn the ops channel in time for compliance
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ps -ef | awk 'NR>1 {print $1}' | tr '[:lower:]' '[:upper:]'; true ; } > /tmp/pre1/valleyLayer
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'valleyLayer'
+  run-end-to-end-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/valleyLayer 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/valleyLayer 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  uk_nz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: GPIO pin warmup
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\njudy,seoul,45\niris,delhi,70\nraj,lisbon,43\nzoe,toronto,43\n' >"/tmp/lion.csv" && awk -F, '$3 > 70 {print $1}' "/tmp/lion.csv"; true ; } > /tmp/pre1/SSH-ROM
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'SSH-ROM'
+  produce-end-to-end-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/SSH-ROM 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/SSH-ROM 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  LQQN-691-loop-build:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Then we resume the held out set
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; list='lorem ipsum dolor sit amet'; declare -p list; true ; } > /tmp/pre1/blake_2f63349b0daebf73
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'blake_2f63349b0daebf73'
+  charlie:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/blake_2f63349b0daebf73 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/blake_2f63349b0daebf73 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  entry1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Checkpoint 12 board alert
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ls -pQ /var/log | paste -sd ' '; true ; } > /tmp/pre1/efa463
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'efa463'
+  add-metrics-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/efa463 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/efa463 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  tryPush:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Phase 31
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; find /var/log \( -name '*log*' -o -name '*.gz' \) -exec echo {} ';' 2>/dev/null | xargs ls -ld; true ; } > /tmp/pre1/LOT_024105
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'LOT_024105'
+  tweak-router-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/LOT_024105 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/LOT_024105 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  guardsetup:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; getent group | cut -d : -f 3 | awk '{print $1 * 2}' | sort -n | uniq -c; true ; } > /tmp/pre1/LEDGER_ECHO
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'LEDGER_ECHO'
+  bug-6450:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/LEDGER_ECHO 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/LEDGER_ECHO 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  littleMint:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Carry out a full watermark of the video chunks
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ls -1 /etc/default | shuf -n 5 | sort -r; true ; } > /tmp/pre1/ApqH71LrkpZjSFPC
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'ApqH71LrkpZjSFPC'
+  ensure-partial-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/ApqH71LrkpZjSFPC 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/ApqH71LrkpZjSFPC 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  mvcCollapseInterceptor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Where is the changelog
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; set -- fig plum peach; echo $#; true ; } > /tmp/pre1/67455661-9a64-853c
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '67455661-9a64-853c'
+  rust-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/67455661-9a64-853c 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/67455661-9a64-853c 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  cFjkwbwSJv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Cold start power supply 308d43
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; tr -d '[:digit:]' </proc/cpuinfo | wc -w; true ; } > /tmp/pre1/173.131
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '173.131'
+  run-staging-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/173.131 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/173.131 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  pub115h:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Retry a8bf
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | \grep -s -c -i --color=never -e 'processor'; true ; } > /tmp/pre1/access_20261218
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'access_20261218'
+  helios-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/access_20261218 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/access_20261218 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  loadLoginAnimated:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: No pick without approval
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; if test -k /tmp ; then echo ok; fi; true ; } > /tmp/pre1/zIME
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'zIME'
+  raj-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/zIME 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/zIME 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  br6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: AttestAccessLogs
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; cp /etc/shells "/tmp/Stage.copy"&& sed -i.orig 's|/bin/|/opt/bin/|' "/tmp/Stage.copy"&& diff /etc/shells "/tmp/Stage.copy"|head -5; true ; } > /tmp/pre1/exp-30q
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'exp-30q'
+  xray:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/exp-30q 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/exp-30q 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  log_total_disabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Repair Of The Archive Tables
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; mkdir -p "/var/tmp/videoeast" && touch "/var/tmp/videoeast"/a.tmp "/var/tmp/videoeast"/b.tmp && find "/var/tmp/videoeast" -name '*.tmp' -delete && ls -A "/var/tmp/videoeast"; true ; } > /tmp/pre1/RSA
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'RSA'
+  sirius-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/RSA 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/RSA 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  k_z:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Review petty cash q4
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo 'task 1 of 3' | od -c | head -n 2; true ; } > /tmp/pre1/SKU-21941-QD
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'SKU-21941-QD'
+  bun-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/SKU-21941-QD 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/SKU-21941-QD 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  Kind68:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Resolution to make life easier
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; if test ! -d ${HOME}; then echo true; else echo false; fi; true ; } > /tmp/pre1/fa89c14e914
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'fa89c14e914'
+  spin-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/fa89c14e914 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/fa89c14e914 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  cbIdFailedCamera:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Parcels tagged with no errors
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; result='it'\''s done'; declare -p result; true ; } > /tmp/pre1/Polar
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'Polar'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/Polar 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/Polar 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  on_retry:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: We have to sweep the adapter weights
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; if [ -G $HOME ]; then echo found; else echo 'not found'; fi; true ; } > /tmp/pre1/_wip-f44b9aae
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '_wip-f44b9aae'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/_wip-f44b9aae 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/_wip-f44b9aae 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  RDB4BOvWUZq8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; hr() { echo "[$(date +%T)] $*"; }; hr '   leading spaces'; true ; } > /tmp/pre1/REF96116
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'REF96116'
+  rc-v5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/REF96116 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/REF96116 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  kAGwbcNwIo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Keep focusing the checkout page
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; cat /etc/passwd |cut -f7 -d: |awk -F/ '{print NF-1}'; true ; } > /tmp/pre1/51cfb68c74be8bab57ec9e7786226b32593
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '51cfb68c74be8bab57ec9e7786226b32593'
+  ruby3-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/51cfb68c74be8bab57ec9e7786226b32593 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/51cfb68c74be8bab57ec9e7786226b32593 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  sha-ddbd2926f78:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Access card transfer for later
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; tar -czf "/tmp/sandbox-receipt.tgz" -C /etc shells && tar tzf "/tmp/sandbox-receipt.tgz"; true ; } > /tmp/pre1/silent_dat.Pulse
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'silent_dat.Pulse'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/silent_dat.Pulse 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/silent_dat.Pulse 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  PRIVATE_RETRIES_EXTERNAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: eh playtest the lightmaps whatever
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; x=$(echo "trailing spaces   " | wc -c); echo "chars: $x"; true ; } > /tmp/pre1/URI
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'URI'
+  DEPLOY_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/URI 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/URI 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  finally9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Touch and go crawl
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; find ~ -maxdepth 2 -mindepth 1 -type d -path \* -mmin -60 -executable -exec du -sh "{}" ';'; true ; } > /tmp/pre1/1641-PDF
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '1641-PDF'
+  LAB_INIT_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/1641-PDF 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/1641-PDF 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+  animate_alive_future:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Tune the thumbnails
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; cat /etc/group | sort -k3,3 -t : -n; true ; } > /tmp/pre1/lazy283
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'lazy283'
+  feat-5728:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Detect gate output
+          command: |
+            cat /tmp/pre1/lazy283 2>/dev/null | pipefail 2>/dev/null || cat /tmp/pre1/lazy283 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Decompress bundle
+          command: cat old-portions.tgz | tar xzf -
+      - run:
+          command: sleep 30
+      - run:
+          name: Pre-run checks
+          command: sleep 45
+      - run:
+          name: Package artifacts
+          command: du -sh .
+      - run:
+          command: taskset -c 0-3 ./push-stage
+
+  NNKV-3266:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: T plus 2 archival
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; seq 20 3 38 | awk '$1 % 2 == 0' | sort -n; true ; } > /tmp/pre1/zIME
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'zIME'
+  llbRefresh7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: This is where we measure the NTP sync
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo -n 'buy more coffee' | tr -s ' '; true ; } > /tmp/pre1/v4.13.9
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'v4.13.9'
+  GraphPartial:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: X21 spot check junit output
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; for item in {3..1}; do echo $((RANDOM % 17)); done | head --lines=3; true ; } > /tmp/pre1/LOT_024105
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'LOT_024105'
+  lockedSchemaNameSidebarCanyon:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Spare drives swapped check
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -name "user" 2> /dev/null | xargs ls -ld; true ; } > /tmp/pre1/efa463
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'efa463'
+  nope81:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Version product tour FINAL
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printf '%s\n' "erin grace mia leo judy"|awk '{print NF}'; true ; } > /tmp/pre1/fa89c14e914
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'fa89c14e914'
+  lock_total:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: DO NOT skip the snapshot files
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo 'done!'|grep -o .|sort|uniq -c|sort -rn|head -n 3; true ; } > /tmp/pre1/lazy283
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'lazy283'
+  blockPool:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printenv | head -n 5 | cut -d = -f 1; true ; } > /tmp/pre1/REF96116
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'REF96116'
+  AcornV4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: ngl diff the perf baseline
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ps -ef | grep -v grep | wc -l; true ; } > /tmp/pre1/valleyLayer
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'valleyLayer'
+  title_uuid:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: cullSkillTreeTask
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ls /usr/bin|grep -E 'diff'; true ; } > /tmp/pre1/67455661-9a64-853c
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '67455661-9a64-853c'
+  nullsub_99:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: approval HELP
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; if [[ -f /etc/motd ]];then echo 'ok'; fi; true ; } > /tmp/pre1/173.131
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '173.131'
+  NEW_A:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Standby ping
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type d -name "*" -exec stat -c %n {} + 2>/dev/null | sort; true ; } > /tmp/pre1/blake_2f63349b0daebf73
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'blake_2f63349b0daebf73'
+  thirstStats:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Mini Map Cook Task
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; touch '/tmp/campus-daily.log' && chmod u+x '/tmp/campus-daily.log' && [ -x '/tmp/campus-daily.log' ] && echo executable; true ; } > /tmp/pre1/ApqH71LrkpZjSFPC
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'ApqH71LrkpZjSFPC'
+  ms321:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: SYSCALL ping
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; if grep -q '^nameserver' /etc/resolv.conf; then echo exists; else echo missing; fi; true ; } > /tmp/pre1/QxFyL1y38FA
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'QxFyL1y38FA'
+  shouldHideCursor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Image vials in duplicate
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\neva,bogota,66\njuan,oslo,61\numa,toronto,54\nliam,nairobi,51\n' >"/var/tmp/sr3.conf" &&head -n 1 "/var/tmp/sr3.conf" | tr , "\n"; true ; } > /tmp/pre1/URI
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'URI'
+  thunder-seek-setup-rect-poll:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Bench the deployment chart
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; printf %s "it is raining" | md5sum | awk '{print $1}'; true ; } > /tmp/pre1/51cfb68c74be8bab57ec9e7786226b32593
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '51cfb68c74be8bab57ec9e7786226b32593'
+  shader_cli:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: validation timeout 90s
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo "what's next?" && echo 'missing value'; true ; } > /tmp/pre1/SKU-21941-QD
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'SKU-21941-QD'
+  filterGANNonce:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Swap the sensor array via cron
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 1 -type f -name "*.py" -exec wc -c {} +; true ; } > /tmp/pre1/vector333
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'vector333'
+  limit-ratio-spark-cheese:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo; echo ok; echo; true ; } > /tmp/pre1/LEDGER_ECHO
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'LEDGER_ECHO'
+  ivy-mitten:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Excuse the wait
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; id -Gn | tr ' ' '\n' | awk 'length > 5' | sort | uniq -u; true ; } > /tmp/pre1/sTocKCoNfiGvAllEY
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'sTocKCoNfiGvAllEY'
+  upload63-uat:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: LoadTestCoverageReportStep
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo hi > '/tmp/spam_final.bak' && stat -c '%n %s' '/tmp/spam_final.bak'; true ; } > /tmp/pre1/silent_dat.Pulse
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'silent_dat.Pulse'
+  callbACK_GRid_OBjEcT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Runway 10 reboot
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; compgen -b | fmt -w 36 | wc -l; true ; } > /tmp/pre1/exp-30q
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'exp-30q'
+  TAX_EXTERNAL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Finalize step B
+          command: |
+            mkdir -p /tmp/pre1
+            set +o pipefail 2>/dev/null; chunk() { yes abc | head -n $1 ; }; chunk 1456396 > /tmp/pre1/meadow.bramble.TCP; true
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'meadow.bramble.TCP'
+  test_zone_24:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Release candidate already restarted
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/goal-attic" && head -c 1667 /dev/urandom >"/tmp/goal-attic"/blob && du -sh "/tmp/goal-attic"; true ; } > /tmp/pre1/muon_dream_kernel_agent
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'muon_dream_kernel_agent'
+  Global-Pointer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Retrain Adapter Weights SUP1240
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - shells | gzip -c > "/var/tmp/blog-entry02.tgz" && tar -tzf "/var/tmp/blog-entry02.tgz"; true ; } > /tmp/pre1/SSH-ROM
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'SSH-ROM'
+  LG42502:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Unlock polish
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; uname -r; true ; } > /tmp/pre1/_wip-f44b9aae
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '_wip-f44b9aae'
+  playerObj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Centrifuge the water bath and wait
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; echo 'buy more coffee' | tr ' ' '\n' | awk '{print toupper(substr($0,1,1)) substr($0,2)}' | paste -sd ' '; true ; } > /tmp/pre1/a0de8264-98c9-b0ec
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'a0de8264-98c9-b0ec'
+  GraphViewMotor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Dice the config files
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | awk -F: '{print $1}' | sed 's/^/- /'; true ; } > /tmp/pre1/RSA
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'RSA'
+  stash-badge:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Loot the parking passes
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; tar -czf ${TMPDIR:-/tmp}/sa.tgz -C /etc login.defs && mkdir -p "${TMPDIR:-/tmp}/alp3" && tar -xzf ${TMPDIR:-/tmp}/sa.tgz -C "${TMPDIR:-/tmp}/alp3" && ls -R "${TMPDIR:-/tmp}/alp3"; true ; } > /tmp/pre1/Polar
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'Polar'
+  ms_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: Nightly failing spec benchmark
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ls -n /usr/bin | awk 'NR>1 {print $1}' | sort | uniq -c; true ; } > /tmp/pre1/1641-PDF
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - '1641-PDF'
+  cell-riddle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pre1
+      - run:
+          name: 97 sterilization
+          command: |
+            mkdir -p /tmp/pre1
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | head -n 10 | awk 'NR>1 {print $1}'; true ; } > /tmp/pre1/access_20261218
+            echo "done1"
+      - persist_to_workspace:
+          root: /tmp/pre1
+          paths:
+            - 'access_20261218'
+workflows:
+  release:
+    jobs:
+      - loadLoginAnimated
+      - NNKV-3266:
+          requires:
+            - loadLoginAnimated
+      - raj-verify:
+          requires:
+            - NNKV-3266
+      - shouldWakeSpan:
+          requires:
+            - NNKV-3266
+      - llbRefresh7:
+          requires:
+            - shouldWakeSpan
+      - canary-v5:
+          requires:
+            - llbRefresh7
+      - tryPush:
+          requires:
+            - llbRefresh7
+      - GraphPartial:
+          requires:
+            - tryPush
+      - tweak-router-v2:
+          requires:
+            - GraphPartial
+      - entry1:
+          requires:
+            - GraphPartial
+      - lockedSchemaNameSidebarCanyon:
+          requires:
+            - entry1
+      - add-metrics-hang:
+          requires:
+            - lockedSchemaNameSidebarCanyon
+      - Kind68:
+          requires:
+            - lockedSchemaNameSidebarCanyon
+      - nope81:
+          requires:
+            - Kind68
+      - spin-up:
+          requires:
+            - nope81
+      - animate_alive_future:
+          requires:
+            - nope81
+      - lock_total:
+          requires:
+            - animate_alive_future
+      - feat-5728:
+          requires:
+            - lock_total
+      - RDB4BOvWUZq8:
+          requires:
+            - lock_total
+      - blockPool:
+          requires:
+            - RDB4BOvWUZq8
+      - rc-v5:
+          requires:
+            - blockPool
+      - footer-image-block:
+          requires:
+            - blockPool
+      - AcornV4:
+          requires:
+            - footer-image-block
+      - run-end-to-end-artifact-bundle:
+          requires:
+            - AcornV4
+      - mvcCollapseInterceptor:
+          requires:
+            - AcornV4
+      - title_uuid:
+          requires:
+            - mvcCollapseInterceptor
+      - rust-cov:
+          requires:
+            - title_uuid
+      - cFjkwbwSJv:
+          requires:
+            - title_uuid
+      - nullsub_99:
+          requires:
+            - cFjkwbwSJv
+      - run-staging-regression-suite:
+          requires:
+            - nullsub_99
+      - LQQN-691-loop-build:
+          requires:
+            - nullsub_99
+      - NEW_A:
+          requires:
+            - LQQN-691-loop-build
+      - charlie:
+          requires:
+            - NEW_A
+      - littleMint:
+          requires:
+            - NEW_A
+      - thirstStats:
+          requires:
+            - littleMint
+      - ensure-partial-release-candidate:
+          requires:
+            - thirstStats
+      - xxbl38gqx1:
+          requires:
+            - thirstStats
+      - ms321:
+          requires:
+            - xxbl38gqx1
+      - v3-beta:
+          requires:
+            - ms321
+      - PRIVATE_RETRIES_EXTERNAL:
+          requires:
+            - ms321
+      - shouldHideCursor:
+          requires:
+            - PRIVATE_RETRIES_EXTERNAL
+      - DEPLOY_DEV:
+          requires:
+            - shouldHideCursor
+      - kAGwbcNwIo:
+          requires:
+            - shouldHideCursor
+      - thunder-seek-setup-rect-poll:
+          requires:
+            - kAGwbcNwIo
+      - ruby3-cov:
+          requires:
+            - thunder-seek-setup-rect-poll
+      - k_z:
+          requires:
+            - thunder-seek-setup-rect-poll
+      - shader_cli:
+          requires:
+            - k_z
+      - bun-test:
+          requires:
+            - shader_cli
+      - reduce_edgePrevious
+      - filterGANNonce:
+          requires:
+            - reduce_edgePrevious
+      - LAB_MERGE_9:
+          requires:
+            - filterGANNonce
+      - guardsetup:
+          requires:
+            - filterGANNonce
+      - limit-ratio-spark-cheese:
+          requires:
+            - guardsetup
+      - bug-6450:
+          requires:
+            - limit-ratio-spark-cheese
+      - text_platinum:
+          requires:
+            - limit-ratio-spark-cheese
+      - ivy-mitten:
+          requires:
+            - text_platinum
+      - run-end-to-end-integration-tests:
+          requires:
+            - ivy-mitten
+      - sha-ddbd2926f78:
+          requires:
+            - ivy-mitten
+      - upload63-uat:
+          requires:
+            - sha-ddbd2926f78
+      - all-greens:
+          requires:
+            - upload63-uat
+      - br6:
+          requires:
+            - upload63-uat
+      - callbACK_GRid_OBjEcT:
+          requires:
+            - br6
+      - xray:
+          requires:
+            - callbACK_GRid_OBjEcT
+      - skipEmailTaxAlias:
+          requires:
+            - callbACK_GRid_OBjEcT
+      - TAX_EXTERNAL:
+          requires:
+            - skipEmailTaxAlias
+      - rm-edge:
+          requires:
+            - TAX_EXTERNAL
+      - audVertex7:
+          requires:
+            - TAX_EXTERNAL
+      - test_zone_24:
+          requires:
+            - audVertex7
+      - delta:
+          requires:
+            - test_zone_24
+      - uk_nz:
+          requires:
+            - test_zone_24
+      - Global-Pointer:
+          requires:
+            - uk_nz
+      - produce-end-to-end-docker-image:
+          requires:
+            - Global-Pointer
+      - on_retry:
+          requires:
+            - Global-Pointer
+      - LG42502:
+          requires:
+            - on_retry
+      - push-it:
+          requires:
+            - LG42502
+      - MacroHelmetNewIvyCardSignal:
+          requires:
+            - LG42502
+      - playerObj:
+          requires:
+            - MacroHelmetNewIvyCardSignal
+      - jun7-smoke:
+          requires:
+            - playerObj
+      - log_total_disabled:
+          requires:
+            - playerObj
+      - GraphViewMotor:
+          requires:
+            - log_total_disabled
+      - sirius-v2:
+          requires:
+            - GraphViewMotor
+      - cbIdFailedCamera:
+          requires:
+            - GraphViewMotor
+      - stash-badge:
+          requires:
+            - cbIdFailedCamera
+      - rocket:
+          requires:
+            - stash-badge
+      - finally9:
+          requires:
+            - stash-badge
+      - ms_arg:
+          requires:
+            - finally9
+      - LAB_INIT_5:
+          requires:
+            - ms_arg
+      - pub115h:
+          requires:
+            - ms_arg
+      - cell-riddle:
+          requires:
+            - pub115h
+      - helios-ng:
+          requires:
+            - cell-riddle
